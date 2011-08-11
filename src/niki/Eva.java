@@ -19,6 +19,8 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import gnu.trove.map.hash.TLongIntHashMap;
 
+import static niki.NikiConstants.*;
+
 /**
  *
  * @author Petros Koutloubasis <koutloup@gmail.com>
@@ -64,8 +66,8 @@ public class Eva {
         long flashMask;
         int bitCount;
         int potentialKickers = 0;
-        int vmF = 0x6000000;
-        int vmSF = 0x9000000;
+        //int vmF = 0x6000000;
+        //int vmSF = 0x9000000;
 
         while (true) {
             flashMask = cardsHand & 0xFFFF000000000000L;

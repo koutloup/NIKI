@@ -15,6 +15,8 @@
 
 package niki;
 
+import static niki.NikiConstants.*;
+
 /**
  *
  * @author Petros Koutloubasis <koutloup@gmail.com>
@@ -22,17 +24,21 @@ package niki;
 public class Hanalyzer {
 
     //masks for hand values
+    
     public static final long pMask = 0x8000800080008000L;
-    public static final int vmSF = 0x9000000;
-    public static final int vm4K = 0x8000000;
-    public static final int vmFH = 0x7000000;
-    public static final int vmF = 0x6000000;
-    public static final int vmS = 0x5000000;
-    public static final int vm3K = 0x4000000;
-    public static final int vm2P = 0x3000000;
-    public static final int vm1P = 0x2000000;
-    public static final int vmHC = 0x1000000;
 
+    /*
+    public static final int vmSF = 0x9000000; // straight flush
+    public static final int vm4K = 0x8000000; // 4 of a kind
+    public static final int vmFH = 0x7000000; // full house
+    public static final int vmF  = 0x6000000; // flush
+    public static final int vmS  = 0x5000000; // straight
+    public static final int vm3K = 0x4000000; // 3 of a kind
+    public static final int vm2P = 0x3000000; // 2 pair
+    public static final int vm1P = 0x2000000; // 1 pair
+    public static final int vmHC = 0x1000000; // high card
+    */
+    
     public static final int maskedPart = 0xF000000;
 
     public static int getHandValue(long h) {
