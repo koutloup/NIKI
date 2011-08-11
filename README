@@ -20,6 +20,9 @@ SOURCE FILES
 
  - Hand.java
 
+ - NikiConstants.java
+   final class with private constructor to hold constants
+
  - StopWatch.java
 
  - TestGame.java
@@ -31,6 +34,12 @@ OTHER FILES
  - nonflush.ser
    serialized TLongIntHashMap with key => handvalues pairs
  
+
+EXTERNAL LIBRARIES
+ - GNU Trove (gnu.trove.map.hash.TLongIntHashMap)
+   The Trove library provides high speed regular and primitive 
+   collections for Java. 
+   more information/download: http://trove.starlight-systems.com/
 
 LICENSE
  see gpl-3.0.txt
