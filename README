@@ -1,6 +1,36 @@
-		NIKI
+			   NIKI
+
 a poker hand evaluation library for java
 
-Files
+#########################################
+
+
+SOURCE FILES
+
+ - CPlot.java
+   card plotter
+
+ - Deck.java
+
+ - Eva.java
+   the evaluator
+
+ - Hanalyzer
+   handvalue analyzer
+
+ - Hand.java
+
+ - StopWatch.java
+
  - TestGame.java
-	example
+   example file
+
+
+OTHER FILES
+
+ - nonflush.ser
+   serialized TLongIntHashMap with key => handvalues pairs
+ 
+
+LICENSE
+ see gpl-3.0.txt
