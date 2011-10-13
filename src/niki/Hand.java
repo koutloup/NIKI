@@ -22,17 +22,31 @@ import static niki.NikiConstants.*;
  * @author Petros Koutloubasis <koutloup@gmail.com>
  */
 public class Hand {
-    public long cards;
-    public long key;
+    public long cards = 0;
+    public long key = 1;
     int wins = 0;
+
+    Hand() {};
     
     Hand(long cards) {
         this.cards = cards;
-        this.key = 1;
-        this.wins=0;
-        for(int i = 0; i < DECK.length; i++) {
-            if((cards & DECK[i]) == DECK[i])
+        for(int i = 0; i < DECK_BIT_MASKS.length; i++) {
+            if((cards & DECK_BIT_MASKS[i]) == DECK_BIT_MASKS[i])
                 key = key * PRIMES[i];
+        }
+    }
+
+    Hand(String... cards) {
+        for(String card : cards)
+            this.addCard(card);
+    }
+
+    public void addCard(String card) {
+        for(int i = 0; i < DECK_STRINGS.length; i++) {
+            if(card.equals(DECK_STRINGS[i])) {
+                key = key * PRIMES[i];
+                cards = cards + DECK_BIT_MASKS[i];
+            }
         }
     }
 

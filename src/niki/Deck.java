@@ -38,8 +38,8 @@ public class Deck {
         deck = new ArrayList<Long>();
         primes = new ArrayList<Integer>();
 
-        for(int i = 0; i < DECK.length; i++) {
-            deck.add(DECK[i]);
+        for(int i = 0; i < DECK_BIT_MASKS.length; i++) {
+            deck.add(DECK_BIT_MASKS[i]);
             primes.add(PRIMES[i]);
         }
     }

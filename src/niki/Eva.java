@@ -28,7 +28,7 @@ import static niki.NikiConstants.*;
 public class Eva {
     
     private static final boolean DEBUG = true;
-    static private TLongIntHashMap hmNonFlush;
+    private static TLongIntHashMap hmNonFlush;
 
     private static final int[] sfMasks = {
         0, 0, 0, 0,
@@ -42,13 +42,12 @@ public class Eva {
             FileInputStream fis = new FileInputStream("nonflush.ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
             hmNonFlush = (TLongIntHashMap) ois.readObject();
-            System.out.println("loaded "+hmNonFlush.size()+" enumareted hands");
             ois.close();
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
+    
     public static int getValue(long keyHand, long cardsHand) {
         int handValue;
         handValue = Eva.getFlushValue(cardsHand);

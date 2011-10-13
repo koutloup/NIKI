@@ -24,24 +24,15 @@ public class TestGame {
    private static final boolean COUNT_MASKS = false;
 
     public static void main(String[] args) {
-
-        Deck deck = new Deck();
         StopWatch stopWatch = new StopWatch();
+        Deck deck = new Deck(); //start with new deck
 
-        //Eva eva = new Eva();
-
-        /**
-        //AAo - KKo
-        Hand hand1 = new Hand(0x8000000080000000L);
-        Hand hand2 = new Hand(0x400000004000L);
+        /**/
+        Hand hand1 = new Hand("Jh", "Th");
+        Hand hand2 = new Hand("Kd", "Ks");
         /**/
 
-        //JTs - KKo
-        /**/
-        Hand hand1 = new Hand(0x18000000L);
-        Hand hand2 = new Hand(0x400000004000L);
-        /**/
-
+        //remove card in hands from deck
         deck.removeCards(hand1.cards | hand2.cards);
         
         CPlot.print(hand1.cards);
@@ -85,11 +76,12 @@ public class TestGame {
                      (double) deck.keysBoard.length * 100;
 
         //print resulsts
-        System.out.println(deck.keysBoard.length + " games in "
-                            + stopWatch + "ms ("+gps+"g/s)");
         System.out.println("\t\tequity\t\twin");
         System.out.println("Player 1\t" + ep0 + "\t" + winp0 + "\t" + hand1.wins);
         System.out.println("Player 2\t" + ep1 + "\t" + winp1 + "\t" + hand2.wins);
         System.out.println("Ties\t"+ties+" ("+tp/2+")");
+        //print g/s
+        System.out.println(deck.keysBoard.length + " games in "
+                            + stopWatch + "ms ("+gps+"g/s)");
     }
 }
