@@ -41,6 +41,7 @@ public class Eva {
             ObjectInputStream ois = new ObjectInputStream(fis);
             hmNonFlush = (TLongIntHashMap) ois.readObject();
             ois.close();
+            System.out.println("loaded hm size: " + hmNonFlush.size());
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }

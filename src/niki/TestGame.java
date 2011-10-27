@@ -25,20 +25,21 @@ public class TestGame {
         StopWatch stopWatch = new StopWatch();
         Deck deck = new Deck(); //start with new deck
 
-        /**/
-        Hand hand1 = new Hand("Jh", "Th");
-        Hand hand2 = new Hand("Kd", "Ks");
+        //*
+        Hand hand1 = new Hand("Ad,Ts");
+        Hand hand2 = new Hand("Kh,Qh");
         /**/
 
         //remove card in hands from deck
-        deck.removeCards(hand1.cards | hand2.cards);
+        deck.removeCards(hand1.hCards | hand2.hCards);
         
-        CPlot.print(hand1.cards);
-        CPlot.print(hand2.cards);
+        CPlot.print(hand1.hCards);
+        CPlot.print(hand2.hCards);
 
         System.out.println("enumPostFlop");
         stopWatch.start();
         deck.enumPostFlop();
+        //deck.enumRandom(5, 100000);
         stopWatch.stop();
         System.out.println("enumerated "+deck.keysBoard.length+" in "+ stopWatch);
 
@@ -50,11 +51,11 @@ public class TestGame {
         System.out.println("---");
         int keysBoardSize = deck.keysBoard.length;
         for(int i = 0; i < keysBoardSize; i++) {
-            handValue1 = Eva.getValue(deck.keysBoard[i] * hand1.key,
-                                      deck.handsBoard[i] | hand1.cards);
-            handValue2 = Eva.getValue(deck.keysBoard[i] * hand2.key,
-                                      deck.handsBoard[i] | hand2.cards);
-
+            handValue1 = Eva.getValue(deck.keysBoard[i] * hand1.hKey,
+                                      deck.handsBoard[i] | hand1.hCards);
+            handValue2 = Eva.getValue(deck.keysBoard[i] * hand2.hKey,
+                                      deck.handsBoard[i] | hand2.hCards);
+                        
             if(handValue1 != handValue2)
                 if(handValue1 > handValue2)
                     hand1.wins();

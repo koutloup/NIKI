@@ -19,7 +19,7 @@ package niki;
 
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.math.BigInteger;
 
 import static niki.NikiConstants.*;
 
@@ -29,10 +29,11 @@ public class Deck {
     public long[] keysBoard;
     public long[] handsBoard;
 
-    public Deck() {
-        keysBoard = new long[1712304];
-        handsBoard = new long[1712304];
+    public static void main(String[] args) {
+        Deck d = new Deck();
+    }
 
+    public Deck() {
         deck = new ArrayList<Long>();
         primes = new ArrayList<Integer>();
 
@@ -40,29 +41,6 @@ public class Deck {
             deck.add(DECK_BIT_MASKS[i]);
             primes.add(PRIMES[i]);
         }
-    }
-    
-    public void shuffleDeck() {
-        Collections.shuffle(deck);
-    }
-
-    public long dealRandom(int i) {
-        return dealRandom(i, true);
-    }
-    
-    private long dealRandom(int i, boolean remove) {
-        Long cards = 0L;
-        Random r = new Random();
-        int x;
-        while(Long.bitCount(cards) != i) {
-            x = r.nextInt(deck.size());
-            cards = cards | (Long) deck.get(x);
-            if(remove) {
-                deck.remove(x);
-                primes.remove(x);
-            }
-        }
-        return cards;
     }
 
     public void removeCards(long cards) {
@@ -81,7 +59,56 @@ public class Deck {
         System.out.println(deck);
     }
 
+    public void enumRandom(int size, int count) {
+        Long cards = 0L;
+        Long key = 0L;
+        Random r = new Random();
+        keysBoard = new long[count];
+        handsBoard = new long[count];
+
+        int x = 0;
+        long oldCards = 0L;
+        for(int i = 0; i < count; i++) {
+            cards = 0L;
+            key = 1L;
+            while(Long.bitCount(cards) != size) {
+                x = r.nextInt(deck.size());
+                oldCards = cards;
+                cards = cards | (Long) deck.get(x);
+                if(cards != oldCards)
+                    key = 1L * key * primes.get(x);
+            }
+            handsBoard[i] = cards;
+            keysBoard[i] = key;
+        }
+    }
+
+    public static BigInteger fac(int n) {
+        BigInteger fac = BigInteger.ONE;
+        for (int i = 1; i <= n; ++i)
+            fac = fac.multiply(BigInteger.valueOf(i));
+        return fac;
+    }
+
+    public int getPossibleDraws(int n, int r) {
+        BigInteger result;
+        BigInteger a;
+        BigInteger b;
+        BigInteger c;
+        a = fac(n);
+        b = fac(r);
+        c = fac(n -r);
+
+        result = a.divide(b.multiply(c));
+
+        return result.intValue();
+    }
+
     public void enumPostFlop() {
+        int pDraws = getPossibleDraws(deck.size(), 5);
+        keysBoard = new long[pDraws];
+        handsBoard = new long[pDraws];
+        
         int i = 0;
         int a = 0;
         int b = 1;
@@ -95,7 +122,7 @@ public class Deck {
                 for(c=b+1;c<deckSize-2;c++) {
                     for(d=c+1;d<deckSize-1;d++) {
                         for(e=d+1;e<deckSize;e++) {
-                            handsBoard[i] = (Long)deck.get(a)|(Long)deck.get(b)|(Long)deck.get(c)|(Long)deck.get(d)|(Long)deck.get(e);
+                            handsBoard[i] = deck.get(a)|deck.get(b)|deck.get(c)|deck.get(d)|deck.get(e);
                             keysBoard[i] = 1L *primes.get(a) * primes.get(b) * primes.get(c) * primes.get(d) * primes.get(e);
                             i++;
                         }

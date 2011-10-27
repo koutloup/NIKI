@@ -20,17 +20,17 @@ package niki;
 import static niki.NikiConstants.*;
 
 public class Hand {
-    public long cards = 0;
-    public long key = 1;
+    public long hCards = 0; //bit mask for hand
+    public long hKey = 1; //key for hand
     int wins = 0;
 
     Hand() {};
     
     Hand(long cards) {
-        this.cards = cards;
+        this.hCards = cards;
         for(int i = 0; i < DECK_BIT_MASKS.length; i++) {
             if((cards & DECK_BIT_MASKS[i]) == DECK_BIT_MASKS[i])
-                key = key * PRIMES[i];
+                hKey = hKey * PRIMES[i];
         }
     }
 
@@ -39,11 +39,17 @@ public class Hand {
             this.addCard(card);
     }
 
+    Hand(String commaSeparated) {
+        String[] cards = commaSeparated.split(",");
+        for(String card : cards)
+            this.addCard(card);
+    }
+
     public void addCard(String card) {
         for(int i = 0; i < DECK_STRINGS.length; i++) {
             if(card.equals(DECK_STRINGS[i])) {
-                key = key * PRIMES[i];
-                cards = cards + DECK_BIT_MASKS[i];
+                hKey = hKey * PRIMES[i];
+                hCards = hCards | DECK_BIT_MASKS[i];
             }
         }
     }
