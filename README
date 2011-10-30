@@ -23,10 +23,8 @@ SOURCE FILES
  - NikiConstants.java
    final class with private constructor to hold constants
 
- - StopWatch.java
-
- - TestGame.java
-   example file
+ - EquityCalc.java
+   the equity calculator
 
 
 OTHER FILES

@@ -21,7 +21,7 @@ public class EquityCalc {
 
     public static void main(String[] args) {
         Eva.loadEnumHands();
-        Calc("Ad,Ts|Kh,Qh|5c,5d|6c,6d", null, null, 500000);
+        Calc("Ad,Ts|Kh,Qh|6c,6d", null, null, 500000);
     }
 
     public static void Calc(String pHands, String board, String dead, int times) {
